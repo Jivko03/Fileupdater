@@ -21,12 +21,12 @@ jobs:
 
       - name: Deploy files to VM
         run: |
-          rsync -avz --delete --exclude='.git' -e "ssh -o StrictHostKeyChecking=no" ./ username@192.168.6.236:~/file/
+          rsync -avz --delete --exclude='.git' -e "ssh -o StrictHostKeyChecking=no" ./ joe@192.168.6.236:~/file/
 
       - name: Remove old Docker images
         run: |
-          ssh -o StrictHostKeyChecking=no username@192.168.6.236 "docker rmi -f $(docker images -q)"
+          ssh -o StrictHostKeyChecking=no joe@192.168.6.236 "docker rmi -f $(docker images -q)"
 
       - name: Build new Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no username@192.168.6.236 "cd ~/file/ && docker build -t new_image_name ."
+          ssh -o StrictHostKeyChecking=no joe@192.168.6.236 "cd ~/file/ && docker build -t new_image_name ."
