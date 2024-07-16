@@ -1,1 +1,32 @@
 
+name: Deploy to Debian VM
+
+on:
+  push:
+    branches:
+      - main  # Adjust this to the branch you want to deploy from
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.6.0
+        with:
+          ssh-private-key: ${{ secrets.VM_SSH_KEY }}
+
+      - name: Deploy files to VM
+        run: |
+          rsync -avz --delete --exclude='.git' -e "ssh -o StrictHostKeyChecking=no" ./ username@192.168.6.236:~/file/
+
+      - name: Remove old Docker images
+        run: |
+          ssh -o StrictHostKeyChecking=no username@192.168.6.236 "docker rmi -f $(docker images -q)"
+
+      - name: Build new Docker image
+        run: |
+          ssh -o StrictHostKeyChecking=no username@192.168.6.236 "cd ~/file/ && docker build -t new_image_name ."
