@@ -18,7 +18,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.6.0
         with:
           ssh-private-key: ${{ secrets.VM_SSH_KEY }}
-          debug: true
+          ssh-auth-sock: ${{ github.workspace }}/ssh-auth.sock
 
       - name: Deploy files to VM
         run: |
