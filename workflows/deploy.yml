@@ -1,4 +1,4 @@
-
+#!bash/bin
 name: Deploy to Debian VM
 
 on:
