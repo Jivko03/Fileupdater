@@ -23,6 +23,6 @@ jobs:
         run: |
           ssh-keyscan -H 51.120.122.186 >> ~/.ssh/known_hosts
           ssh joe@192.168.6.236 'bash -s' < ./deploy_script.sh
-          rsync -avz --delete --exclude='.git' -e "ssh -o StrictHostKeyChecking=no" ./ joe@192.168.6.236:~/file/
+         
         env:
             SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
