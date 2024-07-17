@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       
       - name: Build and push Docker image
-        working-directory: docker-frontend-backend-db/backend
+        working-directory: docker-frontend-backend-db/
         run: |
           docker build -t jivkoivanov/fileeditor .
           docker push jivkoivanov/fileeditor:latest
