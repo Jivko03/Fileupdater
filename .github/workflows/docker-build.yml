@@ -22,10 +22,11 @@ jobs:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-    - name: Build and push Docker image
+    - name: Build and push Docker images
       run: |
-        docker build -t jivkoivanov/fileeditor:latest ./docker-frontend-backend-db
-        docker push jivkoivanov/fileeditor:latest
+        cd docker-frontend-backend-db
+        docker-compose build
+        docker-compose push
 
     - name: SSH into VM and pull Docker image
       uses: appleboy/ssh-action@v0.1.3
