@@ -21,7 +21,7 @@ jobs:
     - name: SSH into VM and pull repository
       uses: appleboy/ssh-action@v0.1.3
       with:
-        host: 192.168.6.236
+        host: 192.168.49.1
         username: joe
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
