@@ -25,6 +25,6 @@ jobs:
         username: joe
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          cd ~/file  # Ensure this is the directory where you want to pull the repository
+          cd ~/file/Fileupdater/  # Ensure this is the directory where you want to pull the repository
           git pull https://github.com/Jivko03/Fileupdater.git
 
